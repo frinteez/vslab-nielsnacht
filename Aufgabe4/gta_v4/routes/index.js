@@ -131,7 +131,7 @@ router.get('/api/geotags', (req, res) => {
   totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
   currentPage = parseInt(req.query.page) || 1;
   return res.status(200).json({
-    taglist: paginatedResults,  // Assuming you'll populate taglist appropriately
+    taglist: paginatedResults, 
     latitude: null,
     longitude: null,
     currentPage: currentPage,
@@ -188,8 +188,8 @@ router.post('/api/geotags', (req, res) => {
  */
 
 // TODO: ... your code here ...
-router.get('/api/geotags/:id', (req, res) => {
-  const id = req.params.id;
+router.get('/api/geotags/:id?', (req, res) => {
+  const id = parseInt(req.params.id);
   const tag = store.getGeoTagById(id);
   if (tag) {
     res.json(tag);
@@ -213,8 +213,8 @@ router.get('/api/geotags/:id', (req, res) => {
  */
 
 // TODO: ... your code here ...
-router.put('/api/geotags/:id', (req, res) => {
-  const id = req.params.id;
+router.put('/api/geotags/:id?', (req, res) => {
+  const id = parseInt(req.params.id);
   const { name, latitude, longitude, hashtag } = req.body;
   const updatedGeoTag = new GeoTag(name, latitude, longitude, hashtag, id);
   const result = store.updateGeoTag(id, updatedGeoTag);
@@ -237,8 +237,8 @@ router.put('/api/geotags/:id', (req, res) => {
  */
 
 // TODO: ... your code here ...
-router.delete('/api/geotags/:id', (req, res) => {
-  const id = req.params.id;
+router.delete('/api/geotags/:id?', (req, res) => {
+  const id = parseInt(req.params.id);
   const result = store.removeid(id);
   if (result) {
     res.json(result);
